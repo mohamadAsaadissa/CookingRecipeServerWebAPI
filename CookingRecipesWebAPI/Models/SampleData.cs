@@ -3,7 +3,7 @@ using CookingRecipesWebAPI.Models;
 using System;
 using System.Linq;
 
-namespace VideosWebApiServer.Models
+namespace CookingRecipesWebAPI.Models
 {
     public static class SampleData
     {
