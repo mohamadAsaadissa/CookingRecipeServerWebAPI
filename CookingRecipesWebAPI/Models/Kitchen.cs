@@ -11,5 +11,8 @@ namespace CookingRecipesWebAPI.Models
 
         public string Country { get; set; }
         public string Summary { get; set; }
+
+       
+        public Dish Dish { get; set; }
     }
 }

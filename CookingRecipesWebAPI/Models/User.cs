@@ -6,7 +6,7 @@ namespace CookingRecipesWebAPI.Models
     public class User
     {
        
-            public int UserId { get; set; }
+            public string UserId { get; set; }
             public string Name { get; set; }
             public string Email { get; set; }
             public string Pass { get; set; }
@@ -27,7 +27,11 @@ namespace CookingRecipesWebAPI.Models
     {
         public int CommentId { get; set; }
         public string Description { get; set; }
+
+
+        public string UserId { get; set; } 
         public User User { get; set; }
+        public string DishId { get; set; }  
         public Dish Dish { get; set; }
     }
  }

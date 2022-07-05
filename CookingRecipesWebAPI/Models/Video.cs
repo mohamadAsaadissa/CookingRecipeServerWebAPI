@@ -12,5 +12,9 @@ namespace CookingRecipesWebAPI.Models
         public string Title { get; set; }
         public string Summary { get; set; }
         public DateTime dateTime { get; set; }
+
+        public string ExtraInfoId { get; set; }
+
+        public ExtraInfo ExtraInfo { get; set; }
     }
 }
