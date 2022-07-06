@@ -14,10 +14,10 @@ namespace CookingRecipesWebAPI
         public byte Like { get; set; }
         public DateTime Date { get; set; }
         // Relationship : one to one
-        public string KitchenId { get; set; }
+        public virtual string KitchenId { get; set; }
         public Kitchen Kitchen { get; set; }
 
-        public string ReceiptId { get; set; }
+        public virtual string ReceiptId { get; set; }
         public Receipt Receipt { get; set; }
         
         //Relationship: one to more

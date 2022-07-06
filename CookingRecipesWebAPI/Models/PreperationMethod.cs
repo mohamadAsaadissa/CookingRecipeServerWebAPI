@@ -11,7 +11,7 @@ namespace CookingRecipesWebAPI.Models
 
         public string Title { get; set; }
         public string Summary { get; set; }
-        public string DishId { get; set; }
+        public virtual string DishId { get; set; }
         public Dish Dish { get; set; }
     }
 }
