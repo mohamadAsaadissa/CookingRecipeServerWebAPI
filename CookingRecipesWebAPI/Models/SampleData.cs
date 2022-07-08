@@ -15,7 +15,7 @@ namespace CookingRecipesWebAPI.Models
                     new User
                     {
                         Name = "Moh", Access=true, Email="axx@gmail.com",
-                        FDate=DateTime.Parse("12/02/2020"), Tel="1212121",
+                        PubDate=DateTime.Parse("12/02/2020"), Tel="1212121",
                         Pass = "WwSS323", UserId="0001"
 
                     },
@@ -25,7 +25,7 @@ namespace CookingRecipesWebAPI.Models
                          Name = "Ahm",
                          Access = true,
                          Email = "bxx@gmail.com",
-                         FDate = DateTime.Parse("02/02/2020"), 
+                         PubDate = DateTime.Parse("02/02/2020"), 
                          Tel = "5235235523",  Pass="WwSS323"
                      }
                 );
@@ -73,14 +73,14 @@ namespace CookingRecipesWebAPI.Models
                         ReceiptId = "0111",
                         Like = 0,
                         DishId = "0220",
-                        Date = DateTime.Now,
+                        PubDate = DateTime.Now,
                         Title = "Havisa sookar",
                         summary = "xvxcxvxcvxvxvxxv"
                     },
                      new Dish
                      {
                          KitchenId = "23123",
-                         ReceiptId = "2300", Like=0, DishId="0220", Date=DateTime.Now,  Title="Mama spaah", summary="gsdfe36534653636"
+                         ReceiptId = "2300", Like=0, DishId="0220", PubDate=DateTime.Now,  Title="Mama spaah", summary="gsdfe36534653636"
                      }
                 ); ;
                 context.SaveChanges();

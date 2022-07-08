@@ -7,11 +7,12 @@ namespace CookingRecipesWebAPI.Models
 {
     public class Ingredient
     { 
-        public string IngredientId { get; set; }
-         
+        public string IngredientId { get; set; }        
         public string Title { get; set; } 
         public string Summary { get; set; }
-        public string DishId { get; set; }
-        public Dish Dish { get; set; }
+        public string Link { get; set; }
+        public Byte Weight { get; set; }
+        public string ReceiptId { get; set; }
+        public Receipt Receipt { get; set; }
     }
 }

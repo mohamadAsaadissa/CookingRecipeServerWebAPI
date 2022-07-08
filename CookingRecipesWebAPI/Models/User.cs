@@ -12,9 +12,9 @@ namespace CookingRecipesWebAPI.Models
             public string Pass { get; set; }
             public string Tel { get; set; }
           
-            public DateTime FDate { get; set; }
+            public DateTime PubDate { get; set; }
             public bool Access { get; set; }
-
+            public string Password { get; set; }
         public ICollection<Comment> Comments { get; set; }
 
         public User()
@@ -27,11 +27,8 @@ namespace CookingRecipesWebAPI.Models
     {
         public int CommentId { get; set; }
         public string Description { get; set; }
-
-
         public string UserId { get; set; } 
         public User User { get; set; }
-        public string DishId { get; set; }  
-        public Dish Dish { get; set; }
+        public List<Receipt> Receipts { get; set; } = new List<Receipt>();
     }
  }
