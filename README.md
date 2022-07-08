@@ -1,4 +1,4 @@
 # CookingRecipeServerWebAPI
 Recenserar de viktigaste matlagningsrecepten
 
-Visual studio .Net c# Controllers in Web API and Request Handling
+Visual studio .Net c# //Web API core // style REST (Representation State Transfer)
