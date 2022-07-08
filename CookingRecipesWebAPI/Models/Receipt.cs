@@ -9,20 +9,21 @@ namespace CookingRecipesWebAPI
 
         public string ReceiptId { get; set; }
         public string Title { get; set; }
-        public string summary { get; set; }
-        public string ImageName { get; set; }
-        public string VideoName { get; set; }
+        public string Summary { get; set; }
+        public string ImageLink{ get; set; }
+        public string VideoLink{ get; set; }
         public string Description { get; set; }
        
         public string AllergInfo { get; set; }
         public byte Like { get; set; }
         public DateTime PubDate { get; set; }
         // Relationship : one to one
-        public virtual string KitchenId { get; set; }
+        public string Country { get; set; }
         public Kitchen Kitchen { get; set; }
+
          public PreperationMethod PreperationMethod { get; set; }
         public Category Category { get; set; }
-        public Whose Whose { get; set; }
+        
 
         //Relationship: one to more
         public List<Comment>  Comments { get; set; } = new List<Comment>();
@@ -31,20 +32,17 @@ namespace CookingRecipesWebAPI
 
 
         public Receipt()
-        {
-
-          
+        {          
             Ingredients = new List<Ingredient>();
-
 
         }
     }
     public enum Category {
-        Soup, Salad, Pastries, Sandwich, Candies, Vegetarian, Fruits, Drink, Lunch, Kids, Diet
+        Soup, Salad, Pastries, Sandwich, Candies, Vegetarian, Fruits, Drink, Lunch, Kids, Diet,Dessert
     }
-    public enum Whose
+    public enum Kitchen
     {
-        Vegetarian, Kids, Diet
+        Natural, Vegetarian, Kids, Diet
     }
     public enum PreperationMethod { Microwave, Oven, Grills, Easy , Fast }
 }

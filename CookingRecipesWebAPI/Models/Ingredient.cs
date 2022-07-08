@@ -11,7 +11,7 @@ namespace CookingRecipesWebAPI.Models
         public string Title { get; set; } 
         public string Summary { get; set; }
         public string Link { get; set; }
-        public Byte Weight { get; set; }
+        public byte Weight { get; set; }
         public string ReceiptId { get; set; }
         public Receipt Receipt { get; set; }
     }

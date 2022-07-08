@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <link href="~/Content/CSS/MySheet.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+   
+</head>
+<body>
+    <div id="tableBlock"></div>
+    <div id="editBlock">
+        <p><b>Edite reciepts</b></p>
+        <table>
+            <tr><td><input type="hidden" id="ReceiptId" /></td><td></td></tr>
+            <tr><td><label>Title: </label></td><td><input type="text" id="editTitle" /></td></tr>
+            <tr><td><label>Summary: </label></td><td><input type="text" id="editsummary" /></td></tr>
+            <tr><td><label>ImageLink: </label></td><td><input type="text" id="editImageLink" /></td></tr>
+            <tr><td><label>VideoLink: </label></td><td><input type="text" id="editVideoLink" /></td></tr>
+            <tr><td><label>Description: </label></td><td><input type="text" id="editDescription" /></td></tr>
+            <tr><td><label>AllergInfo: </label></td><td><input type="text" id="editAllergInfo" /></td></tr>
+            <tr><td><label>PubDate: </label></td><td><input type="datetime" id="editPubDate" /></td></tr>
+            <tr><td><label>Country: </label></td><td><input type="text" id="editCountry" /></td></tr>
+          
+        </table>
+        <button id="editReciept">Save</button>
+    </div>
+    <div id="createBlock">
+        <p><b>Add reciept</b></p>
+        <table>
+            <tr><td><label>Title: </label></td><td><input type="text" id="addTitle" /></td></tr>
+            <tr><td><label>Summary: </label></td><td><input type="text" id="addSummary" /></td></tr>
+            <tr><td><label>ImageLink: </label></td><td><input type="text" id="addImageLink" /></td></tr>
+            <tr><td><label>VideoLink: </label></td><td><input type="text" id="addtVideoLink" /></td></tr>
+            <tr><td><label>Description: </label></td><td><input type="text" id="addDescription" /></td></tr>
+            <tr><td><label>AllergInfo: </label></td><td><input type="text" id="addAllergInfo" /></td></tr>
+            <tr><td><label>PubDate: </label></td><td><input type="datetime" id="addPubDate" /></td></tr>
+            <tr><td><label>Country: </label></td><td><input type="text" id="addCountry" /></td></tr>
+        </table>
+        <button id="addReceipt">Save</button>
+    </div>
+</body>
+</html>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            GetAllReciepts();
+
+            $("#ediReceipt").click(function (event) {
+                event.preventDefault();
+                EditReceipt();
+            });
+
+            $("#addReceipt").click(function (event) {
+                event.preventDefault();
+                AddReceipt();
+            });
+
+        });
+        // Получение всех книг по ajax-запросу
+        function GetAllReceipts() {
+
+            $("#createBlock").css('display', 'block');
+            $("#editBlock").css('display', 'none');
+            $.ajax({
+                url: '/api/Receipts',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    WriteResponse(data);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        // add new receipt
+        function AddReceipt() {
+            // get values for added receipt
+            var receipt = {
+                
+                summary: $("addSummary").val(),
+                ImageLink: $("addImageLink").val(),
+                VideoLink: $("addtVideoLink").val(),
+                Description: $( "addDescription").val(),
+                AllergInfo: $("addPubDate").val(),
+                Country: $("addCountry").val()
+            };
+
+            $.ajax({
+                url: '/api/receipts/',
+                type: 'POST',
+                data: JSON.stringify(receipt),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    GetAllBooks();
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        //DELETE RECEIPT
+        function DeletedReceipt(id) {
+
+            $.ajax({
+                url: '/api/receipts/' + id,
+                type: 'DELETE',
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    GetAllReceipts();
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        // EDIT DATA
+        function EditReceipt() {
+            var id = $('#ReceiptId').val(),
+                  // get new values for edited receipt   
+            var receipt = {
+                ReceiptId= $('#ReceiptId').val(),
+                summary = $ ('editSummary').val(),
+                ImageLink = $('editImageLink').val(),
+                VideoLink = $('editVideoLink').val(),
+                Description = $ ('editDescription').val(),
+                AllergInfo = $ ('editPubDate').val(),
+                Country = $('editCountry').val(),
+            };
+            $.ajax({
+                url: '/api/receipts/' + id,
+                type: 'PUT',
+                data: JSON.stringify(receipt),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    GetAllReceipts();
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        // output the received data to the screen
+        function WriteResponse(receipts) {
+            var strResult = "<table><th>ID</th><th>Title</th><th>Country</th><th>Like</th>";
+            $.each(receipts, function (index, receipt) {
+                strResult += "<tr><td>" + receipt.ReceiptId + "</td><td> " + receipt.Title + "</td><td>" +
+                    receipt.Country + "</td><td>" + receipt.Like +
+                    "</td><td><a id='editItem' data-item='" + receipt.ReceiptId + "' onclick='EditItem(this);' >Edit</a></td>" +
+                    "<td><a id='delItem' data-item='" + receipt.ReceiptId + "' onclick='DeleteItem(this);' >Delete</a></td></tr>";
+            });
+            strResult += "</table>";
+            $("#tableBlock").html(strResult);
+
+        }
+        // delete handler
+        function DeleteItem(el) {
+            // get the id of the object to be deleted
+            var id = $(el).attr('data-item');
+            DeleteReceipt(id);
+        }
+        // edit handler
+        function EditItem(el) {
+            // get the id of the object being edited
+            var id = $(el).attr('data-item');
+            GetReceipt(id);
+        }
+     // displaying the data of the book being edited in the fields for editing
+        function ShowReceipt(receipt) {
+            if (receipt != null)
+            {
+                $("#createBlock").css('display', 'none');
+                $("#editBlock").css('display', 'block');
+                $('#ReceiptId').val(receipt.ReceiptId);
+                $('editSummary').val(receipt.Summary);
+                $('editImageLink').val(receipt.ImageLink);
+                $('editVideoLink').val(receipt.VideoLink);
+                $('editDescription').val(receipt.Description);
+                $('editPubDate').val(receipt.PubDate);
+                $('editCountry').val(receipt.Country);
+            }
+            else {
+                alert("This reciept does not exist.");
+            }
+        }
+        // RECEIPT request for editing
+        function GetReceipts(id) {
+            $.ajax({
+                url: '/api/receipts/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    ShowReceipt(data);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+    </script>
+}

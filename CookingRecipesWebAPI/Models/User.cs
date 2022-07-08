@@ -30,5 +30,6 @@ namespace CookingRecipesWebAPI.Models
         public string UserId { get; set; } 
         public User User { get; set; }
         public List<Receipt> Receipts { get; set; } = new List<Receipt>();
+
     }
  }

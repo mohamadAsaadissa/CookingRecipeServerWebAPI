@@ -33,22 +33,7 @@ namespace CookingRecipesWebAPI.Models
             }
 
             
-            if (!context.Kitchens.Any())
-            {
-                context.Kitchens.AddRange(
-                    new Kitchen
-                    {
-                        Country="Maroca", Summary="", KitchenId="12123", 
-                       
-                    },
-                     new Kitchen
-                     {
-                         Country = "Emarate", KitchenId="23123",
-                         Summary = ""
-                     }
-                ); ; 
-                context.SaveChanges();
-            }
+            
             if (!context.Receipts.Any())
             {
                 context.Receipts.AddRange(
@@ -64,23 +49,23 @@ namespace CookingRecipesWebAPI.Models
                 ); ;
                 context.SaveChanges();
             }
-            if (!context.Dishs.Any())
+            if (!context.Receipts.Any())
             {
-                context.Dishs.AddRange(
-                    new Dish
+                context.Receipts.AddRange(
+                    new Receipt
                     {
-                        KitchenId = "12123",
+                        
                         ReceiptId = "0111",
                         Like = 0,
-                        DishId = "0220",
+                     
                         PubDate = DateTime.Now,
                         Title = "Havisa sookar",
-                        summary = "xvxcxvxcvxvxvxxv"
+                        Summary = "xvxcxvxcvxvxvxxv"
                     },
-                     new Dish
+                     new Receipt
                      {
-                         KitchenId = "23123",
-                         ReceiptId = "2300", Like=0, DishId="0220", PubDate=DateTime.Now,  Title="Mama spaah", summary="gsdfe36534653636"
+                        
+                         ReceiptId = "2300", Like=0, PubDate=DateTime.Now,  Title="Mama spaah", Summary="gsdfe36534653636"
                      }
                 ); ;
                 context.SaveChanges();
